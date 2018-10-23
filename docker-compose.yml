@@ -1,0 +1,21 @@
+version: '3'
+services:
+    adminer:
+        image: 'adminer:latest'
+        ports:
+            - '50000:8080'
+    php:
+        build :
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - '30000:80'
+        environment:
+            - PHP_EXTENSIONS=pdo_mysql
+    db:
+        image: mariadb
+        environment:
+            - MYSQL_ROOT_PASSWORD=secret
+            - MYSQL_USER=moi
+            - MYSQL_PASSWORD=password
+            - MYSQL_DATABASE=tp_docker
